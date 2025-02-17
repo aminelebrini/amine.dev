@@ -374,7 +374,7 @@ h2{
     font-weight: bold;
 }
 
-h5{
+h5 {
     text-align: center;
     font-size: 20px;
     margin-top: 2%;
@@ -382,22 +382,31 @@ h5{
     font-weight: bold;
 }
 
-.img img{
-    margin-left: 7%;
-}
-
-.imgs{
+.img {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
-.imgs img{
-    margin-top: 2%;
-    margin-left: 1%;
-    justify-content: center;
+.img img {
+    max-width: 100%;
+    height: auto;
 }
+
+.imgs {
+    display: flex;
+    flex-wrap: wrap; /* يسمح بالتفاف الصور عند تصغير الشاشة */
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* يضيف تباعدًا موحدًا بين الصور */
+}
+
+.imgs img {
+    margin-top: 2%;
+    width: 70px;
+    height: 70px;
+}
+
 
 h2.projects-title {
     text-align: center;
