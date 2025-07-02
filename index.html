@@ -8,8 +8,8 @@
     
     <title>AMINE DEV</title>
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+<!--<style>
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
 *{
     margin: 0;
@@ -73,7 +73,7 @@ nav a{
 nav a.active{
     color: #b74b4b;
     border-bottom: 3px solid #b74b4b;
-}*/
+}
 
 @media(max-width:995px){
     nav{
@@ -316,7 +316,7 @@ hr {
     
     border-color: transparent;
 }
-/* أسلوب العرض الافتراضي للروابط في الشاشات الكبيرة */
+/* أسلوب العرض الافتراضي للروابط في الشاشات الكبيرة 
 .menu-toggle {
     display: none;
     background: none;
@@ -326,13 +326,12 @@ hr {
     cursor: pointer;
 }
 
-/* تنسيق روابط القائمة */
+/* تنسيق روابط القائمة 
 .nav-links {
     display: flex;
     gap: 20px;
 }
 
-/* إظهار زر القائمة وإخفاء الروابط في الشاشات الصغيرة */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
@@ -350,7 +349,7 @@ hr {
         padding: 10px 0;
     }
 
-    /* إظهار الروابط عند فتح القائمة */
+    
     .nav-links.active {
         display: flex;
     }
@@ -395,10 +394,10 @@ h5 {
 
 .imgs {
     display: flex;
-    flex-wrap: wrap; /* يسمح بالتفاف الصور عند تصغير الشاشة */
+    flex-wrap: wrap; 
     justify-content: center;
     align-items: center;
-    gap: 10px; /* يضيف تباعدًا موحدًا بين الصور */
+    gap: 10px; 
 }
 
 .imgs img {
@@ -418,7 +417,7 @@ h2.projects-title {
     margin-top: 6%;
     text-transform: uppercase;
     position: relative;
-    animation: moveUpDown 2s infinite; /* إضافة الحركة */
+    animation: moveUpDown 2s infinite; 
 }
 
 h3 {
@@ -426,7 +425,7 @@ h3 {
     font-size: 2.5rem;
     color: #fff;
     margin-top: 1%;
-    animation: moveUpDown 2s infinite; /* إضافة الحركة */
+    animation: moveUpDown 2s infinite; 
 }
 
 h2.projects-title::after {
@@ -439,16 +438,15 @@ h2.projects-title::after {
     left: 0;
 }
 
-/* تحديد الحركة */
 @keyframes moveUpDown {
     0% {
-        transform: translateY(0); /* في البداية في مكانه */
+        transform: translateY(0); 
     }
     50% {
-        transform: translateY(-10px); /* يتحرك للأعلى */
+        transform: translateY(-10px); 
     }
     100% {
-        transform: translateY(0); /* يعود للأسفل */
+        transform: translateY(0);
     }
 }
 
@@ -526,13 +524,12 @@ h2.projects-title::after {
     color: black;
 }
 .infoo:hover a {
-    color: white; /* مثال: تغيير اللون إلى أصفر */
+    color: white; 
     transition: color 0.3s ease-in-out;
 }
 
 
 
-  /* Media Queries for Responsiveness */
   @media (max-width: 768px) {
     .projects {
       padding: 0 10px;
@@ -597,7 +594,7 @@ h2.projects-title::after {
     margin-top: 6%;
     text-transform: uppercase;
     position: relative;
-    animation: moveUpDown 2s infinite; /* إضافة الحركة */
+    animation: moveUpDown 2s infinite; 
 }
 
 .education h2::after {
@@ -620,19 +617,18 @@ h2.projects-title::after {
     margin-top: 1%;
     text-transform: uppercase;
     position: relative;
-    animation: moveUpDown 2s infinite; /* إضافة الحركة */
+    animation: moveUpDown 2s infinite; 
 }
 
-/* تحديد الحركة */
 @keyframes moveUpDown {
     0% {
-        transform: translateY(0); /* في البداية في مكانه */
+        transform: translateY(0); 
     }
     50% {
-        transform: translateY(-10px); /* يتحرك للأعلى */
+        transform: translateY(-10px);
     }
     100% {
-        transform: translateY(0); /* يعود للأسفل */
+        transform: translateY(0); 
     }
 }
 
@@ -664,15 +660,15 @@ h2.projects-title::after {
             }
         
             .home .home-content h1{
-                font-size: 5rem;  /* تصغير حجم العنوان */
+                font-size: 5rem;  
             }
         
             .home .home-content h3{
-                font-size: 2.5rem;  /* تصغير حجم العنوان الفرعي */
+                font-size: 2.5rem;  
             }
         
             .home-img img{
-                width: 70vw;  /* تصغير صورة المنزل */
+                width: 70vw; 
                 margin-top: 4rem;
             }
         }
@@ -681,39 +677,39 @@ h2.projects-title::after {
             .home, .home-content, .home-content p {
                 flex-direction: column;
                 width: auto;
-                gap: 3rem; /* تقليص المسافة بين العناصر في .home */
+                gap: 3rem; 
             }
         
             .home .home-content h1 {
-                font-size: 4.5rem;  /* تصغير حجم النص في الشاشات الصغيرة */
+                font-size: 4.5rem;
             }
         
             .home .home-content h3 {
-                font-size: 2rem;  /* تصغير الحجم في الشاشات الصغيرة */
+                font-size: 2rem;  
             }
         
             .home .home-content p {
-                font-size: 1.4rem;  /* تصغير حجم النص */
+                font-size: 1.4rem;  
             }
         
             .home-img img {
-                width: 60vw; /* تقليص حجم الصورة */
+                width: 60vw;
             }
         
             .skills, .image{
                 flex-direction: column;
-                gap: 2rem;  /* ترتيب .skills بشكل عمودي */
+                gap: 2rem;  
             }
             .image img {
-                width: 100%;         /* يجعل الصورة تأخذ عرض العنصر الحاوي لها */
-                height: auto;        /* يجعل ارتفاع الصورة يتناسب مع العرض */
-                object-fit: cover;   /* يضمن أن الصورة تغطي العنصر بالكامل مع الحفاظ على النسبة */
-                border-radius: 10px; /* يمكنك تعديل هذا إذا كنت تريد إضافة حواف دائرية */
+                width: 100%;         
+                height: auto;      
+                object-fit: cover;   
+                border-radius: 10px; 
             }
             
             .menu-toggle {
                 display: block;
-                font-size: 3rem;  /* تصغير حجم الخط لزر القائمة */
+                font-size: 3rem; 
             }
         
             .nav-links {
@@ -729,42 +725,39 @@ h2.projects-title::after {
         
         @media (max-width: 480px) {
             .home .home-content h1 {
-                font-size: 3.5rem;  /* تقليص حجم العنوان بشكل أكبر */
+                font-size: 3.5rem; 
             }
         
             .home .home-content h3 {
-                font-size: 1.8rem;  /* تقليص حجم العنوان الفرعي */
+                font-size: 1.8rem;  
             }
         
             .home .home-content p {
-                font-size: 1.2rem;  /* تقليص حجم النص */
-                width: 100%;  /* عرض النص بالكامل */
+                font-size: 1.2rem; 
+                width: 100%;  
             }
         
             .home-img img {
-                width: 50vw;  /* تقليص حجم الصورة أكثر */
+                width: 50vw;  
             }
         
             .menu-toggle {
-                font-size: 2.5rem;  /* تقليص حجم زر القائمة */
+                font-size: 2.5rem;  
             }
         
             .nav-links {
-                gap: 8px;  /* تقليص المسافة بين عناصر القائمة */
+                gap: 8px;  
             }
         }
         
-        /* إعداد الأنيميشن للأقسام */
 .skills, .projects, .education, .certificates, .home  {
     opacity: 0;
-    transform: translateY(50px); /* نضيف التحريك إلى أعلى */
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* عندما يظهر العنصر في العرض */
 .skills.visible, .projects.visible, .education.visible, .certificates.visible , .home.visible{
     opacity: 1;
-    transform: translateY(0); /* إعادة الوضع الأصلي */
+    transform: translateY(0); 
 }
 
 @keyframes moveUp {
@@ -778,7 +771,6 @@ h2.projects-title::after {
     }
 }
 
-/* لتطبيق الأنيميشن عند ظهور العنصر */
 .skills.in-view, .projects.in-view, .education.in-view, .certificates.in-view , .home.in-view {
     animation: moveUp 1s forwards;
 }
@@ -788,9 +780,27 @@ h2.projects-title::after {
     display: flex;
     align-items: center;
 }
+</style>-->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
+  .up {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    height: 92vh;
+    line-height: 10px;
+  }
+  .up h1{
+    font-size: 35px;
+  }
+  .up p{
+    font-size: 25px;
+  }
 </style>
 <body>
-    <header>
+   <!--<header>
         <a href="index.html" class="logo">AMINE <span style="color: white;">DEV.</span></a>
         <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
         <nav class="nav-links">
@@ -965,11 +975,17 @@ h2.projects-title::after {
             <img src="https://github.com/aminelebrini/amine.dev/blob/main/root/5012159_1712167976.jpg?raw=true" alt="Certificate">
             <img class="imgg" src="https://github.com/aminelebrini/amine.dev/blob/main/root/java_basic%20certificate_page-0001.jpg?raw=true" alt="Certificate">
         </div>
+    </div>-->
+    <div class="up">
+        <video width="100" height="100" autoplay loop muted playsinline>
+            <source src="https://cdn-icons-mp4.flaticon.com/512/17122/17122352.mp4" type="video/mp4">
+        </video>
+        <h1>the portfolio is under update</h1>
+        <p>will be available soon</p>
     </div>
 </body>
-<script>
-    // وظيفة للتحقق من العنصر في العرض
-function checkInView() {
+<!--<script>
+/*function checkInView() {
     const sections = document.querySelectorAll('.skills, .projects, .education, .certificates, .home');
     const windowHeight = window.innerHeight;
 
@@ -982,15 +998,13 @@ function checkInView() {
     });
 }
 
-// التحقق عند التمرير
 window.addEventListener('scroll', checkInView);
 
-// عند تحميل الصفحة للتأكد من الأنيميشن عند الدخول
 document.addEventListener('DOMContentLoaded', checkInView);
 
 document.querySelector('.menu-toggle').addEventListener('click', function() {
     document.querySelector('nav').classList.toggle('active');
 });
 
-</script>
+</script>-->
 </html>
