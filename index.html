@@ -1,457 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LEBRINI AMINE - Portfolio</title>
+  <title>AMINE LEBRINI | Full-Stack Architect</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <link rel="icon" href="https://avatars.githubusercontent.com/u/113290995?v=4" type="image/jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
-        html{
-              scroll-behavior: smooth;
+    :root {
+      --accent: #00f7ff;
+      --glass-bg: rgba(15, 15, 15, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
 
-        }
-        body {
-      background: #0f0f0f;
-      font-family: 'Kdam Thmor Pro', sans-serif;
+    body {
+      background: #050505;
       color: white;
-      width: 100%;
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
     }
-    .neon {
-      text-shadow: 0 0 5px #00f7ff, 0 0 10px #00f7ff;
-    }
-    .glass {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-    }
-    .btnnn {
-      background-color: #00f7ff;
-      color: white;
-      border-radius: 9999px;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .social-icons a{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 3rem;
-    height: 3rem;
-    background-color: #00f7ff;
-    border: 0.2rem solid white;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    margin-top: 1%;
-    margin-left: 2%;
-    transition: 0.3s ease;
-    color: white;
-}
 
-.social-icons a:hover{
-    color: #00f7ff;
-    transform: scale(1.3) translateY(-5px);
-    background-color: white;
-    box-shadow: 0  0 25px #00f7ff;
-}
+    #cursor {
+      width: 8px; height: 8px; background: var(--accent);
+      border-radius: 50%; position: fixed; pointer-events: none;
+      z-index: 10001; mix-blend-mode: difference;
+    }
 
-@keyframes borderGradient {
-    0% {
-      border-color: #06b6d4;
-      box-shadow: 0 0 10px #3b82f6;
+    #cursor-follower {
+      width: 40px; height: 40px; border: 1px solid var(--accent);
+      border-radius: 50%; position: fixed; pointer-events: none;
+      z-index: 10000; transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
+      opacity: 0.5;
     }
-    50% {
-      border-color: #3b82f6;
-      box-shadow: 0 0 20px #2563eb;
-    }
-    100% {
-      border-color: #06b6d4;
-      box-shadow: 0 0 10px #3b82f6;
-    }
-  }
 
-  .border-gradient-animate {
-    border-style: solid;
-    border-width: 4px;
-    border-image-slice: 1;
-    border-image-source: linear-gradient(40deg, #06b6d4, #3b82f6, #2563eb);
-    animation: borderGradient 1s ease-in-out infinite;
-  }
-  .btnn {
-    
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 1000;
-  }
-
-  .btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #00f7ff;
-    color: #0f0f0f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 0 10px #00f7ff80;
-    transition: transform 0.3s ease;
-    animation: animate 1s ease-in-out infinite alternate;
-  }
-
-  .btn:hover {
-    transform: scale(1.1);
-  }
-  @keyframes animate {
-    0%{
-      transform: translateY(10px);
+    #splash-screen {
+      position: fixed; inset: 0; z-index: 9999; background: #050505;
+      display: flex; flex-direction: column; items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
     }
-    
-    100%{
-      transform: translateY(-10px);
+
+    .splash-exit {
+      transform: translateY(-100%);
+      transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
     }
-    
-  }
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
+
+    .blur-fade {
+      opacity: 0; filter: blur(20px); transform: translateY(30px);
+      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .blur-fade.active {
+      opacity: 1; filter: blur(0); transform: translateY(0);
+    }
+
+    .tilt-card {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out;
+    }
+
+    .tilt-card:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .card-glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(600px circle at var(--x) var(--y), rgba(0, 247, 255, 0.15), transparent 40%);
+      pointer-events: none;
+    }
+
+    .grid-layout {
+      display: grid; grid-template-columns: repeat(12, 1fr);
+      gap: 1px; background-color: var(--glass-border);
+      border: 1px solid var(--glass-border);
+    }
+
+    .glass-cell {
+      background: #0a0a0a; backdrop-filter: blur(15px);
+      padding: 2.5rem; position: relative;
+    }
+
+    .font-racing {
+      font-weight: 700; text-transform: uppercase; letter-spacing: -0.05em;
+    }
+
+    .cell-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px;
+      color: var(--accent); text-transform: uppercase;
+      letter-spacing: 2px; display: block; margin-bottom: 1.5rem; opacity: 0.6;
+    }
+
+    .skill-bar { height: 4px; background: rgba(255,255,255,0.1); width: 100%; margin-top: 10px; }
+    .skill-progress { height: 100%; background: var(--accent); width: 0; transition: width 2s cubic-bezier(0.19, 1, 0.22, 1); }
+
+    canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
+
+    .btn-racing {
+      border: 1px solid var(--accent); color: var(--accent);
+      padding: 10px 20px; font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; transition: 0.3s; display: inline-block;
+    }
+
+    .btn-racing:hover {
+      background: var(--accent); color: black;
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+    }
+
+    @media (max-width: 768px) { body { cursor: auto; } #cursor, #cursor-follower { display: none; } }
   </style>
 </head>
-<body class="p-3">
+<body class="p-0 md:p-6 lg:p-10 overflow-hidden">
+
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
+
+  <div id="splash-screen">
+    <div class="text-center">
+      <div class="font-racing text-5xl mb-6">AMINE<span class="text-cyan-400">.</span>CORE</div>
+      <div class="w-64 h-[2px] bg-white/10 relative mx-auto overflow-hidden">
+        <div id="splash-bar" class="absolute top-0 left-0 h-full bg-[#00f7ff] w-0"></div>
+      </div>
+      <div class="mt-4 text-[10px] uppercase tracking-[0.3em] text-cyan-400 flex justify-between w-64 mx-auto">
+        <span id="status-text">INITIALIZING</span>
+        <span id="status-percent">0%</span>
+      </div>
+    </div>
+  </div>
+
   <canvas id="codeRain"></canvas>
-  <!-- Navbar -->
-  <nav class="flex justify-between items-center p-4 glass rounded-full w-[80%] mx-auto">
-    <div class="text-xl font-bold">LEBRINI AMINE</div>
-    <ul class="flex gap-6 text-sm">
-      <li><a href="#about" id="ab" class="hover:text-cyan-400 text-xl">About Me</a></li>
-      <li><a href="#skills" class="hover:text-cyan-400 text-xl">Skills</a></li>
-      <li><a href="#projects" class="hover:text-cyan-400 text-xl">Projects</a></li>
-    </ul>
-    <a href="#contact" class="btnnn bg-cyan-500 px-4 py-2 rounded-full font-medium hover:bg-cyan-600">Contact Me</a>
+
+  <nav class="max-w-[1600px] mx-auto grid-layout mb-10 blur-fade">
+    <div class="col-span-12 md:col-span-4 glass-cell flex items-center">
+      <div class="font-racing text-xl">AMINE<span class="text-cyan-400">.</span>LEBRINI</div>
+    </div>
+    <div class="col-span-12 md:col-span-8 glass-cell flex justify-end gap-10 items-center">
+      <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-widest opacity-60">
+        <a href="#about" class="hover:text-cyan-400">About</a>
+        <a href="#skills" class="hover:text-cyan-400">Skills</a>
+        <a href="#projects" class="hover:text-cyan-400">Works</a>
+      </div>
+      <a href="#contact" class="btn-racing">CONNECT_</a>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
-  <!-- Hero Section -->
-<section id="about" class="mt-5 flex flex-col md:flex-row items-center justify-between gap-8 w-[95%] mx-auto p-6 glass rounded-lg">
-  <div class="md:w-2/3">
-    <h1 class="text-4xl font-extrabold neon mt-2">ABOUT ME :</h1>
-    <p class="mt-4 text-gray-300 leading-relaxed text-[17px]">
-      I am <strong>Amine Lebrini</strong>, a 21-year-old passionate about software development and building impactful digital experiences. I’m fluent in <strong>Arabic, French, and English</strong>, which enables me to collaborate effectively across multicultural and cross-functional teams.
-  <br /><br />
-  As a <strong>Front-End Developer</strong>, I specialize in crafting responsive, high-performance web applications using <strong>HTML, CSS, JavaScript</strong>.
-  <br /><br />
-  As a <strong>UI/UX Designer</strong>, I create intuitive, user-centered experiences using <strong>Figma</strong> and modern design systems—bridging the gap between design and development.
-  <br /><br />
-  I’m passionate about delivering <strong>clean, accessible, and scalable digital products</strong> across web platforms to craft seamless, engaging user experiences.
-  <br /><br />
-  Leading innovation as <strong>CEO of 01Coders Club</strong>, I’m committed to empowering developers and designers through collaboration, quality, and purposeful design.
-</p>
-    <div class="social-icons mt-6">
-      <h4 class="text-lg ml-2 mb-2">Contact me:</h4>
-      <a href="https://www.linkedin.com/in/amine-lebrini-76b526297/"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/aminelebrini"><i class="fab fa-github"></i></a>
-      <a href="https://x.com/AmineLebrini4"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://www.instagram.com/amine_lebrini_42/"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/@techno_coding"><i class="fab fa-youtube"></i></a>
-    </div>
-  </div>
-
-  <div class="relative w-[320px] h-[320px] mx-auto">
-  <div
-    class="
-      w-[300px] h-[300px] 
-      rounded-full 
-      p-1 
-      bg-gradient-to-tr from-cyan-400 via-blue-500 to-indigo-600 
-      shadow-[0_10px_15px_-3px_rgba(14,165,233,0.7),0_4px_6px_-2px_rgba(59,130,246,0.5)] 
-      flex items-center justify-center
-      hover:scale-105 transition-transform duration-500 ease-in-out
-      relative
-      before:absolute before:inset-0 before:rounded-full before:border-4 before:border-gradient-animate
-      "
-  >
-    <img 
-      src="https://avatars.githubusercontent.com/u/113290995?v=4" 
-      alt="Profile" 
-      class="rounded-full object-cover w-full h-full border-4 border-black filter brightness-95 contrast-110 shadow-lg"
-    />
-  </div>
-</div>
-
-  </div>
-</section>
-
-<section id="skills" class="mt-16 w-[95%] mx-auto glass rounded-xl p-6 shadow-lg flex justify-center flex-col items-center">
-  <h2 class="text-3xl font-bold neon mb-6 text-center">My Skills</h2>
-
-  <div class="flex flex-wrap gap-8 text-center justify-center">
+  <main class="max-w-[1600px] mx-auto grid-layout">
     
-    <!-- Skill Card -->
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="fab fa-html5 text-4xl text-orange-500 mb-2"></i>
-      <h3 class="text-xl font-semibold">HTML5</h3>
+    <div class="col-span-12 lg:col-span-8 glass-cell min-h-[500px] flex flex-col justify-end blur-fade">
+      <span class="cell-label animate-pulse">Data // Identity_V4</span>
+      <h1 class="font-racing text-6xl md:text-[7rem] leading-[0.85] mb-6">
+        FULL-STACK <br> <span class="text-cyan-400 italic">ARCHITECT.</span>
+      </h1>
+      <p class="max-w-xl text-gray-400 text-lg uppercase font-light tracking-tight">
+        21 years old. CEO @ 01Coders. Building high-velocity digital experiences through code & precision design.
+      </p>
     </div>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="fab fa-css3-alt text-4xl text-blue-500 mb-2"></i>
-      <h3 class="text-xl font-semibold">CSS3</h3>
+    <div class="col-span-12 lg:col-span-4 glass-cell p-0 overflow-hidden relative group blur-fade">
+      <img src="https://avatars.githubusercontent.com/u/113290995?v=4" class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:scale-110 transition duration-700">
+      <div class="absolute bottom-5 left-5 bg-cyan-400 text-black px-3 py-1 font-bold text-xs uppercase">Status: Active</div>
     </div>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="fab fa-js text-4xl text-yellow-400 mb-2"></i>
-      <h3 class="text-xl font-semibold">JavaScript</h3>
+    <div class="col-span-12 glass-cell border-t-4 border-cyan-400" id="skills">
+      <span class="cell-label">Capabilities // Engine</span>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div class="space-y-2">
+            <i class="devicon-javascript-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase">Logic Engine</div>
+            <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+        </div>
+        <div class="space-y-2">
+            <i class="devicon-tailwindcss-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase">UI Framework</div>
+            <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
+        </div>
+        <div class="space-y-2">
+            <i class="devicon-figma-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase">UX Design</div>
+            <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+        </div>
+        <div class="space-y-2">
+            <i class="devicon-mysql-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase">Data Systems</div>
+            <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+        </div>
+        <div class="space-y-2">
+            <i class="devicon-c-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase">Low-level C</div>
+            <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+        </div>
+      </div>
     </div>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="fab fa-figma text-4xl text-pink-500 mb-2"></i>
-      <h3 class="text-xl font-semibold">Figma</h3>
+    <div class="col-span-12 md:col-span-6 glass-cell tilt-card group cursor-pointer blur-fade" id="projects">
+      <div class="card-glow"></div>
+      <span class="cell-label">PRJ_01 // Blog</span>
+      <div class="overflow-hidden h-64 border border-white/5 mb-6 relative bg-black">
+        <img src="https://media.licdn.com/dms/image/v2/D4D22AQHK-eaRaVgkaA/feedshare-shrink_2048_1536/B4DZv66IJrGUAo-/0/1769441100708?e=1772064000&v=beta&t=0vuN-AoaNZcmVcRGoEM0-Mi4iV0j-jW6chs72BnUjkg" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition duration-500">
+      </div>
+      <h3 class="font-racing text-2xl group-hover:text-cyan-400 transition">Liquid Retail UI</h3>
     </div>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="fas fa-laptop-code text-4xl text-green-400 mb-2"></i>
-      <h3 class="text-xl font-semibold">Responsive Design</h3>
+    <div class="col-span-12 md:col-span-6 glass-cell tilt-card group cursor-pointer blur-fade">
+      <div class="card-glow"></div>
+      <span class="cell-label">PRJ_02 // COMMUNITY</span>
+      <div class="overflow-hidden h-64 border border-white/5 mb-6 relative bg-black">
+        <img src="https://github.com/aminelebrini/amine.dev/blob/main/28_05_2025%2021_57_40.png?raw=true" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition duration-500">
+      </div>
+      <h3 class="font-racing text-2xl group-hover:text-cyan-400 transition">01Coders Hub</h3>
     </div>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="fas fa-palette text-4xl text-purple-400 mb-2"></i>
-      <h3 class="text-xl font-semibold">UI/UX</h3>
+    <div class="col-span-12 glass-cell blur-fade" id="contact">
+      <span class="cell-label">Sync // Contact_Gate</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div>
+          <h2 class="font-racing text-4xl mb-4 italic">LETS <span class="text-cyan-400">SYNC.</span></h2>
+          <p class="text-xs opacity-50 font-mono tracking-widest uppercase">Available for high-impact projects.</p>
+        </div>
+        <div class="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-4">
+           <a href="mailto:aminelebrini4@gmail.com" class="border border-white/10 p-4 text-center hover:bg-cyan-400 hover:text-black transition-all group">
+             <i class="fas fa-envelope mb-2 block group-hover:scale-110 transition-transform"></i>
+             <span class="text-[10px] font-bold uppercase">Mail</span>
+           </a>
+           <a href="https://github.com/aminelebrini" class="border border-white/10 p-4 text-center hover:bg-cyan-400 hover:text-black transition-all group">
+             <i class="fab fa-github mb-2 block group-hover:scale-110 transition-transform"></i>
+             <span class="text-[10px] font-bold uppercase">GitHub</span>
+           </a>
+           <a href="https://www.linkedin.com/in/amine-lebrini-76b526297/" class="border border-white/10 p-4 text-center hover:bg-cyan-400 hover:text-black transition-all group">
+             <i class="fab fa-linkedin mb-2 block group-hover:scale-110 transition-transform"></i>
+             <span class="text-[10px] font-bold uppercase">LinkedIn</span>
+           </a>
+           <a href="https://www.instagram.com/amine_lebrini_42/" class="border border-white/10 p-4 text-center hover:bg-cyan-400 hover:text-black transition-all group">
+             <i class="fab fa-instagram mb-2 block group-hover:scale-110 transition-transform"></i>
+             <span class="text-[10px] font-bold uppercase">Insta</span>
+           </a>
+        </div>
+      </div>
     </div>
+  </main>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="devicon-vscode-plain colored text-4xl mb-2"></i>
-      <h3 class="text-xl font-semibold">VS Code</h3>
-    </div>
+  <footer class="py-12 text-center opacity-20 font-mono text-[9px] tracking-[1em] uppercase">
+    Lebrini Amine // v4.2.0-Alpha // 2026
+  </footer>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="devicon-mysql-plain colored text-4xl mb-2"></i>
-      <h3 class="text-xl font-semibold">MY SQL</h3>
-    </div>
+  <script>
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="devicon-c-plain colored text-4xl mb-2"></i>
-      <h3 class="text-xl font-semibold">C Programming</h3>
-    </div>
+      window.addEventListener('load', () => {
+      const splash = document.getElementById('splash-screen');
+      const bar = document.getElementById('splash-bar');
+      const percent = document.getElementById('status-percent');
+      const statusTxt = document.getElementById('status-text');
+      
+      let progress = 0;
+      const stages = ["BOOTING_CORE", "MAPPING_UX", "LOADING_DATA", "SYSTEM_READY"];
+      
+      const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 8) + 2;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          statusTxt.innerText = "ACCESS_GRANTED";
+          setTimeout(() => {
+            splash.classList.add('splash-exit');
+            document.body.style.overflow = 'auto';
+            document.querySelectorAll('.blur-fade').forEach((el, i) => {
+              setTimeout(() => el.classList.add('active'), i * 150);
+            });
+          }, 600);
+        }
+        bar.style.width = progress + "%";
+        percent.innerText = progress + "%";
+        if (progress > 30) statusTxt.innerText = stages[1];
+        if (progress > 65) statusTxt.innerText = stages[2];
+        if (progress > 90) statusTxt.innerText = stages[3];
+      }, 40);
+    });
 
-    <div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="devicon-git-plain colored text-4xl mb-2"></i>
-      <h3 class="text-xl font-semibold">Git</h3>
-    </div>
+    const cards = document.querySelectorAll('.tilt-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+      });
+    });
 
-    <!--<div class="group w-[220px] relative bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer">
-      <i class="devicon-react-plain colored text-4xl mb-2"></i>
-      <h3 class="text-xl font-semibold">React</h3>
-    </div>-->
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursor-follower');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+      follower.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
+    });
 
-  </div>
-</section>
+    const skillObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        document.querySelectorAll('.skill-progress').forEach(bar => {
+          bar.style.width = bar.getAttribute('data-width');
+        });
+      }
+    }, { threshold: 0.5 });
+    skillObserver.observe(document.getElementById('skills'));
 
-<section id="projects" class="mt-15 w-[95%] mx-auto glass rounded-xl p-6 shadow-lg">
-  <h2 class="text-3xl font-bold neon mb-6 text-center">My Projects</h2>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-    
-    <!-- Project Card 1 -->
-    <div class="bg-[#0f0f0f] border border-cyan-500 rounded-xl overflow-hidden shadow-md hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 group">
-  <div class="overflow-hidden">
-    <img 
-      src="https://github.com/aminelebrini/amine.dev/blob/main/1731237098664.png?raw=true" 
-      alt="Project 1" 
-      class="w-full h-[200px] mt-10 object-cover group-hover:scale-110 transition-transform duration-500"
-    >
-  </div>
-  <div class="p-4">
-    <h3 class="text-xl font-semibold text-cyan-400">E-commerce Website</h3>
-    <p class="text-gray-300 text-sm mt-2 leading-relaxed">
-      A modern front-end e-commerce interface built with <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>, and <strong>Tailwind CSS</strong>. Includes product grid, shopping cart UI, filters, and responsive layout.
-    </p>
-    <a href="https://github.com/aminelebrini/Front-End-Projects/tree/main/ecom%20web" target="_blank" class="text-cyan-400 mt-3 inline-block hover:underline font-medium transition-all duration-300 hover:text-white">
-      🚀 View Live Project
-    </a>
-  </div>
-</div>
-    <!-- Project Card 2 -->
-     <div class="bg-[#0f0f0f] border border-cyan-500 rounded-xl overflow-hidden shadow-md hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 group">
-  <div class="overflow-hidden">
-    <img 
-      src="https://github.com/aminelebrini/amine.dev/blob/main/1731237098641.png?raw=true" 
-      alt="TECHNO CODING SCHOOL Project" 
-      class="w-full h-[200px] mt-10 object-cover group-hover:scale-110 transition-transform duration-500"
-    >
-  </div>
-  <div class="p-4">
-    <h3 class="text-xl font-semibold text-cyan-400">TECHNO CODING SCHOOL</h3>
-    <p class="text-gray-300 text-sm mt-2 leading-relaxed">
-      A modern educational front-end project for a coding school. Built with <strong>HTML</strong>, <strong>CSS</strong>, <strong>JavaScript</strong>, and <strong>Tailwind CSS</strong>. It includes login/signup forms, a learning dashboard, and interactive UI sections to engage new learners.
-    </p>
-    <a href="https://github.com/aminelebrini/Front-End-Projects/tree/main/TECHNO%20CODING%20SCHOOL" target="_blank" class="text-cyan-400 mt-3 inline-block hover:underline font-medium transition-all duration-300 hover:text-white">
-      🎓 View Live Project
-    </a>
-  </div>
-</div>
-    <!-- Project Card 3 -->
-   <div class="bg-[#0f0f0f] border border-cyan-500 rounded-xl overflow-hidden shadow-md hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300 group">
-  <div class="overflow-hidden">
-    <img 
-      src="https://github.com/aminelebrini/amine.dev/blob/main/28_05_2025%2021_57_40.png?raw=true" 
-      alt="01Coders Club" 
-      class="w-full h-[200px] mt-10 object-cover group-hover:scale-110 transition-transform duration-500"
-    >
-  </div>
-  <div class="p-4">
-    <h3 class="text-xl font-semibold text-cyan-400">01Coders Club</h3>
-    <p class="text-gray-300 text-sm mt-2 leading-relaxed">
-      A creative tech club I founded to unite passionate developers and designers under one vision: learn, build, and innovate. <strong>01Coders</strong> organizes coding challenges, project collaborations, and tech meetups to grow the community and enhance practical skills.
-    </p>
-    <div class="mt-3 flex flex-wrap gap-2">
-      <span class="bg-cyan-500 text-black px-2 py-1 text-xs rounded">Community</span>
-      <span class="bg-cyan-500 text-black px-2 py-1 text-xs rounded">Leadership</span>
-      <span class="bg-cyan-500 text-black px-2 py-1 text-xs rounded">Tech Events</span>
-      <span class="bg-cyan-500 text-black px-2 py-1 text-xs rounded">Innovation</span>
-    </div>
-    <a href="https://01codersclub.pages.dev/" target="_blank" class="text-cyan-400 mt-4 inline-block hover:underline font-medium transition-all duration-300 hover:text-white">
-      🎓 View Live Project
-    </a>
-  </div>
-</div>
-  </div>
-</section>
-
-<section id="contact" class="mt-15 w-[95%] mx-auto glass rounded-xl p-6 shadow-lg justify-center">
-  <h2 class="text-3xl font-bold neon mb-6 text-center">Contact Me</h2>
-
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
-
-    <!-- Email -->
-    <a href="mailto:aminelebrini4@gmail.com" target="_blank"
-      class="group bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 shadow-md hover:shadow-cyan-500/50 hover:scale-105 transition-transform duration-300">
-      <i class="fas fa-envelope text-3xl text-cyan-400 mb-2"></i>
-      <h3 class="text-sm font-medium text-gray-300 break-all">aminelebrini4@gmail...</h3>
-    </a>
-
-    <a href="tel:+212716038492" 
-      class="group bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 shadow-md hover:shadow-blue-400/50 hover:scale-105 transition-transform duration-300">
-      <i class="fas fa-phone text-3xl text-blue-400 mb-2"></i>
-      <h3 class="text-sm font-medium text-gray-300">+212 7 16 03 84 92</h3>
-    </a>
-
-    <!-- Instagram -->
-    <a href="https://www.instagram.com/amine_lebrini_42/" target="_blank"
-      class="group bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 shadow-md hover:shadow-pink-400/50 hover:scale-105 transition-transform duration-300">
-      <i class="fab fa-instagram text-3xl text-pink-400 mb-2"></i>
-      <h3 class="text-sm font-medium text-gray-300">@amine_lebrini_42</h3>
-    </a>
-
-    <!-- Facebook -->
-    <a href="https://www.linkedin.com/in/amine-lebrini-76b526297/" target="_blank"
-      class="group bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 shadow-md hover:shadow-blue-500/50 hover:scale-105 transition-transform duration-300">
-      <i class="fab fa-linkedin text-3xl text-blue-500 mb-2"></i>
-      <h3 class="text-sm font-medium text-gray-300">Amine LEBRINI</h3>
-    </a>
-
-    <!-- X / Twitter -->
-    <a href="https://x.com/AmineLebrini4" target="_blank"
-      class="group bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 shadow-md hover:shadow-gray-400/50 hover:scale-105 transition-transform duration-300">
-      <i class="fab fa-x-twitter text-3xl text-gray-300 mb-2"></i>
-      <h3 class="text-sm font-medium text-gray-300">@AmineLebrini4</h3>
-    </a>
-
-    <!-- GitHub -->
-    <a href="https://www.github.com/aminelebrini" target="_blank"
-      class="group bg-[#0f0f0f] rounded-xl p-4 border border-cyan-500 shadow-md hover:shadow-white/50 hover:scale-105 transition-transform duration-300">
-      <i class="fab fa-github text-3xl text-white mb-2"></i>
-      <h3 class="text-sm font-medium text-gray-300">aminelebrini</h3>
-    </a>
-
-  </div>
-</section>
-<div class="btnn">
-  <button type="button" class="btn" id="scrollBtn">
-    <i class="fas fa-arrow-down" id="scrollIcon"></i>
-  </button>
-</div>
+    const canvas = document.getElementById('codeRain');
+    const ctx = canvas.getContext('2d');
+    let columns, drops;
+    function resize() {
+      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+      columns = Math.floor(canvas.width / 14);
+      drops = Array(columns).fill(1);
+    }
+    function draw() {
+      ctx.fillStyle = 'rgba(5, 5, 5, 0.1)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00f7ff'; ctx.font = '14px monospace';
+      drops.forEach((y, i) => {
+        const text = Math.random() > 0.8 ? "1" : "0";
+        ctx.fillText(text, i * 14, y * 14);
+        if (y * 14 > canvas.height && Math.random() > 0.985) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    window.addEventListener('resize', resize);
+    resize(); setInterval(draw, 50);
+  </script>
 </body>
-<script>
-  const scrollBtn = document.getElementById('scrollBtn');
-  const scrollIcon = document.getElementById('scrollIcon');
-
-  scrollBtn.addEventListener('click', () => {
-    if(window.scrollY > 0) {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }else{
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: 'smooth'
-      });
-    }
-  });
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-      scrollIcon.classList.remove('fa-arrow-down');
-      scrollIcon.classList.add('fa-arrow-up');
-    } else {
-      scrollIcon.classList.remove('fa-arrow-up');
-      scrollIcon.classList.add('fa-arrow-down');
-    }
-  });
-
-  const canvas = document.getElementById('codeRain');
-const ctx = canvas.getContext('2d');
-
-const letters = '01010101010101010101010010101';
-const fontSize = 14;
-
-let columns;
-let drops;
-
-function initializeRain() {
-  columns = Math.floor(canvas.width / fontSize);
-  drops = Array.from({ length: columns }).fill(1);
-}
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  initializeRain();
-}
-
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-function draw() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = '#00f7ff80';
-  ctx.font = `${fontSize}px monospace`;
-
-  drops.forEach((y, i) => {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, y * fontSize);
-
-    if (y * fontSize > canvas.height && Math.random() > 0.975) {
-      drops[i] = 0;
-    } else {
-      drops[i]++;
-    }
-  });
-}
-
-setInterval(draw, 33);
-
-</script>
 </html>
