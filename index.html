@@ -17,11 +17,9 @@
     }
 
     body {
-      background: #050505;
-      color: white;
+      background: #050505; color: white;
       font-family: 'Space Grotesk', sans-serif;
-      overflow-x: hidden;
-      cursor: none;
+      overflow-x: hidden; cursor: none;
     }
 
     #cursor {
@@ -43,29 +41,13 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    .splash-exit {
-      transform: translateY(-100%);
-      transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
-    }
+    .splash-exit { transform: translateY(-100%); transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
 
-    .blur-fade {
-      opacity: 0; filter: blur(20px); transform: translateY(30px);
-      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+    .blur-fade { opacity: 0; filter: blur(20px); transform: translateY(30px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+    .blur-fade.active { opacity: 1; filter: blur(0); transform: translateY(0); }
 
-    .blur-fade.active {
-      opacity: 1; filter: blur(0); transform: translateY(0);
-    }
-
-    .tilt-card {
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.2s ease-out;
-    }
-
-    .tilt-card:hover {
-      background: rgba(255, 255, 255, 0.02);
-    }
+    .tilt-card { position: relative; transform-style: preserve-3d; transition: transform 0.2s ease-out; }
+    .tilt-card:hover { background: rgba(255, 255, 255, 0.02); }
 
     .card-glow {
       position: absolute; inset: 0;
@@ -73,26 +55,11 @@
       pointer-events: none;
     }
 
-    .grid-layout {
-      display: grid; grid-template-columns: repeat(12, 1fr);
-      gap: 1px; background-color: var(--glass-border);
-      border: 1px solid var(--glass-border);
-    }
+    .grid-layout { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1px; background-color: var(--glass-border); border: 1px solid var(--glass-border); }
+    .glass-cell { background: #0a0a0a; backdrop-filter: blur(15px); padding: 2.5rem; position: relative; }
 
-    .glass-cell {
-      background: #0a0a0a; backdrop-filter: blur(15px);
-      padding: 2.5rem; position: relative;
-    }
-
-    .font-racing {
-      font-weight: 700; text-transform: uppercase; letter-spacing: -0.05em;
-    }
-
-    .cell-label {
-      font-family: 'JetBrains Mono', monospace; font-size: 10px;
-      color: var(--accent); text-transform: uppercase;
-      letter-spacing: 2px; display: block; margin-bottom: 1.5rem; opacity: 0.6;
-    }
+    .font-racing { font-weight: 700; text-transform: uppercase; letter-spacing: -0.05em; }
+    .cell-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 1.5rem; opacity: 0.6; }
 
     .skill-bar { height: 4px; background: rgba(255,255,255,0.1); width: 100%; margin-top: 10px; }
     .skill-progress { height: 100%; background: var(--accent); width: 0; transition: width 2s cubic-bezier(0.19, 1, 0.22, 1); }
@@ -102,25 +69,35 @@
     .btn-racing {
       border: 1px solid var(--accent); color: var(--accent);
       padding: 10px 20px; font-family: 'JetBrains Mono', monospace;
-      font-size: 12px; transition: 0.3s; display: inline-block;
+      font-size: 12px; transition: 0.3s; display: inline-block; cursor: pointer;
     }
 
-    .btn-racing:hover {
-      background: var(--accent); color: black;
-      box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
-    }
+    .btn-racing:hover { background: var(--accent); color: black; box-shadow: 0 0 20px rgba(0, 247, 255, 0.3); }
 
     @media (max-width: 768px) { body { cursor: auto; } #cursor, #cursor-follower { display: none; } }
+
+    #project-slider-container {
+      overflow: hidden;
+      width: 100%;
+    }
+    #project-track {
+      align-items: stretch;
+    }
+
+    .project-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      display: block;
+    }
   </style>
 </head>
-<body class="p-0 md:p-6 lg:p-10 overflow-hidden">
-
+<body class="p-0 md:p-6 lg:p-10">
   <div id="cursor"></div>
   <div id="cursor-follower"></div>
 
   <div id="splash-screen">
     <div class="text-center">
-      <div class="font-racing text-5xl mb-6">AMINE<span class="text-cyan-400">.</span>CORE</div>
+      <div class="font-racing text-5xl mb-6">AMINE<span class="text-cyan-400">.</span>DEV</div>
       <div class="w-64 h-[2px] bg-white/10 relative mx-auto overflow-hidden">
         <div id="splash-bar" class="absolute top-0 left-0 h-full bg-[#00f7ff] w-0"></div>
       </div>
@@ -139,9 +116,9 @@
     </div>
     <div class="col-span-12 md:col-span-8 glass-cell flex justify-end gap-10 items-center">
       <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-widest opacity-60">
-        <a href="#about" class="hover:text-cyan-400">About</a>
-        <a href="#skills" class="hover:text-cyan-400">Skills</a>
-        <a href="#projects" class="hover:text-cyan-400">Works</a>
+        <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+        <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors">Works</a>
       </div>
       <a href="#contact" class="btn-racing">CONNECT_</a>
     </div>
@@ -155,63 +132,215 @@
         FULL-STACK <br> <span class="text-cyan-400 italic">ARCHITECT.</span>
       </h1>
       <p class="max-w-xl text-gray-400 text-lg uppercase font-light tracking-tight">
-        21 years old. CEO @ 01Coders. Building high-velocity digital experiences through code & precision design.
+        21 years old. FULL-STACK ARCHITECT. Building high-velocity digital experiences through code & precision design.
       </p>
     </div>
 
     <div class="col-span-12 lg:col-span-4 glass-cell p-0 overflow-hidden relative group blur-fade">
-      <img src="https://avatars.githubusercontent.com/u/113290995?v=4" class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:scale-110 transition duration-700">
+      <img src="https://avatars.githubusercontent.com/u/113290995?v=4" class="w-full h-full object-cover brightness-75 group-hover:grayscale-0 group-hover:scale-110 transition duration-700">
       <div class="absolute bottom-5 left-5 bg-cyan-400 text-black px-3 py-1 font-bold text-xs uppercase">Status: Active</div>
     </div>
 
     <div class="col-span-12 glass-cell border-t-4 border-cyan-400" id="skills">
-      <span class="cell-label">Capabilities // Engine</span>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+      <span class="cell-label">Capabilities // Engine_Core</span>
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12">
+        
         <div class="space-y-2">
-            <i class="devicon-javascript-plain text-3xl text-cyan-400"></i>
-            <div class="font-bold text-sm uppercase">Logic Engine</div>
-            <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+            <div class="flex items-center gap-3">
+              <i class="devicon-react-original text-3xl text-cyan-400"></i>
+              <div class="font-bold text-sm uppercase tracking-tighter">React.js</div>
+            </div>
+            <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
         </div>
+
         <div class="space-y-2">
-            <i class="devicon-tailwindcss-plain text-3xl text-cyan-400"></i>
-            <div class="font-bold text-sm uppercase">UI Framework</div>
-            <div class="skill-bar"><div class="skill-progress" data-width="95%"></div></div>
+          <div class="flex items-center gap-3">
+            <i class="devicon-laravel-original text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">Laravel</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="65%"></div></div>
         </div>
+
         <div class="space-y-2">
-            <i class="devicon-figma-plain text-3xl text-cyan-400"></i>
-            <div class="font-bold text-sm uppercase">UX Design</div>
-            <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+          <div class="flex items-center gap-3">
+            <i class="fas fa-database text-2xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">MySQL & PostgreSQL</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="88%"></div></div>
         </div>
+
         <div class="space-y-2">
-            <i class="devicon-mysql-plain text-3xl text-cyan-400"></i>
-            <div class="font-bold text-sm uppercase">Data Systems</div>
-            <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+          <div class="flex items-center gap-3">
+            <i class="devicon-docker-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">Docker</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
         </div>
+
         <div class="space-y-2">
+          <div class="flex items-center gap-3">
             <i class="devicon-c-plain text-3xl text-cyan-400"></i>
-            <div class="font-bold text-sm uppercase">Low-level C</div>
-            <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+            <div class="font-bold text-sm uppercase tracking-tighter">C Programming</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <i class="devicon-php-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">PHP</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <i class="devicon-figma-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">Figma UI/UX</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="96%"></div></div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <i class="devicon-tailwindcss-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">Tailwind</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="98%"></div></div>
+        </div>
+
+         <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <i class="devicon-javascript-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">ES6+ JS</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="92%"></div></div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <i class="devicon-git-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">Git</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="92%"></div></div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-3">
+            <i class="devicon-bash-plain text-3xl text-cyan-400"></i>
+            <div class="font-bold text-sm uppercase tracking-tighter">Shell / CLI</div>
+          </div>
+          <div class="skill-bar"><div class="skill-progress" data-width="98%"></div></div>
         </div>
       </div>
     </div>
 
-    <div class="col-span-12 md:col-span-6 glass-cell tilt-card group cursor-pointer blur-fade" id="projects">
-      <div class="card-glow"></div>
-      <span class="cell-label">PRJ_01 // Blog</span>
-      <div class="overflow-hidden h-64 border border-white/5 mb-6 relative bg-black">
-        <img src="https://media.licdn.com/dms/image/v2/D4D22AQHK-eaRaVgkaA/feedshare-shrink_2048_1536/B4DZv66IJrGUAo-/0/1769441100708?e=1772064000&v=beta&t=0vuN-AoaNZcmVcRGoEM0-Mi4iV0j-jW6chs72BnUjkg" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition duration-500">
+    <div class="col-span-12 lg:col-span-8 glass-cell blur-fade" id="education">
+      <span class="cell-label">Archive // Academic_Path</span>
+      <div class="flex flex-col md:flex-row items-center gap-10">
+        <div class="flex gap-6 items-center bg-white/5 p-6 border border-white/10 rounded-sm">
+          <img src="https://youcode.ma/images/logos/youcode_logo_dark.png" alt="YouCode" class="h-10 md:h-12 object-contain filter brightness-0 invert opacity-80 hover:opacity-100 transition-opacity">
+          <div class="w-[1px] h-12 bg-white/20"></div>
+          <img src="https://um6p.ma/images/logos/logo-mobile.png" alt="UM6P" class="h-12 md:h-16 object-contain opacity-90 hover:opacity-100 transition-opacity">
+        </div>
+
+        <div class="border-l-2 border-cyan-400 pl-6">
+          <h2 class="font-racing text-3xl mb-1 text-white">FULL-STACK DEVELOPEMENT</h2>
+          <p class="font-mono text-sm tracking-widest text-cyan-400 uppercase">YouCode UM6P</p>
+          <p class="text-[10px] text-gray-500 mt-2 font-bold uppercase tracking-[0.2em]">
+            Safi, Morocco // 2025 - Present
+          </p>
+        </div>
       </div>
-      <h3 class="font-racing text-2xl group-hover:text-cyan-400 transition">Liquid Retail UI</h3>
     </div>
 
-    <div class="col-span-12 md:col-span-6 glass-cell tilt-card group cursor-pointer blur-fade">
-      <div class="card-glow"></div>
-      <span class="cell-label">PRJ_02 // COMMUNITY</span>
-      <div class="overflow-hidden h-64 border border-white/5 mb-6 relative bg-black">
-        <img src="https://github.com/aminelebrini/amine.dev/blob/main/28_05_2025%2021_57_40.png?raw=true" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition duration-500">
-      </div>
-      <h3 class="font-racing text-2xl group-hover:text-cyan-400 transition">01Coders Hub</h3>
+    <div class="col-span-12 lg:col-span-4 glass-cell blur-fade flex items-center justify-center group relative overflow-hidden">
+      <div class="absolute inset-0 bg-cyan-400 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+      <a href="URL_DE_TON_CV.pdf" target="_blank" class="relative z-10 text-center group-hover:text-black transition-colors duration-500">
+        <i class="fas fa-file-pdf text-3xl mb-3 block group-hover:scale-110 transition-transform"></i>
+        <div class="font-racing text-xl tracking-tighter">DOWNLOAD_CV</div>
+        <p class="text-[9px] font-mono uppercase opacity-50">Identity_Verification.pdf</p>
+      </a>
     </div>
+
+
+    <div class="col-span-12 glass-cell blur-fade" id="projects-section">
+      <div class="flex justify-between items-end mb-8">
+        <div>
+          <span class="cell-label">Deployment // Project_Buffer</span>
+          <h2 class="font-racing text-4xl">Featured_Works</h2>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="prevSlide()" class="w-12 h-12 border border-white/10 flex items-center justify-center hover:bg-cyan-400 hover:text-black transition-all group">
+            <i class="fas fa-chevron-left group-active:scale-90"></i>
+          </button>
+          <button onclick="nextSlide()" class="w-12 h-12 border border-white/10 flex items-center justify-center hover:bg-cyan-400 hover:text-black transition-all group">
+            <i class="fas fa-chevron-right group-active:scale-90"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="project-slider-container">
+        <div id="project-track">
+          <div class="project-slide grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="overflow-hidden border border-white/5 relative bg-black aspect-video group cursor-pointer tilt-card">
+              <div class="card-glow"></div>
+              <img src="https://github.com/aminelebrini/amine.dev/blob/main/1769441100708.jpeg?raw=true" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-700">
+            </div>
+            <div class="flex flex-col justify-center">
+              <span class="text-cyan-400 font-mono text-xs mb-2 tracking-widest">[ PRJ_01 ]</span>
+              <h3 class="font-racing text-4xl mb-4 tracking-tighter">ReadUp Blog</h3>
+              <p class="text-gray-400 uppercase text-sm font-light tracking-wide mb-8 leading-relaxed">
+                A high-performance community platform for tech enthusiasts. Built with optimized data structures and precision UI.
+              </p>
+              <div class="flex gap-4">
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">PHP</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">MVC</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">MY SQL</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">DOCKER</span>
+              </div>
+            </div>
+          </div>
+          <div class="project-slide grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="overflow-hidden border border-white/5 relative bg-black aspect-video group cursor-pointer tilt-card">
+              <div class="card-glow"></div>
+              <img src="https://github.com/aminelebrini/amine.dev/blob/main/Screenshot%20from%202026-02-08%2000-26-58.png?raw=true" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-700">
+            </div>
+            <div class="flex flex-col justify-center">
+              <span class="text-cyan-400 font-mono text-xs mb-2 tracking-widest">[ PRJ_02 ]</span>
+              <h3 class="font-racing text-4xl mb-4 tracking-tighter">NextPlay</h3>
+              <p class="text-gray-400 uppercase text-sm font-light tracking-wide mb-8 leading-relaxed">
+                Next-gen gaming dashboard providing real-time analytics and seamless user experiences for competitive players.
+              </p>
+              <div class="flex gap-4">
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">HTML</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">JAVASCRIPT</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">Tailwind</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-slide grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="overflow-hidden border border-white/5 relative bg-black aspect-video group cursor-pointer tilt-card">
+              <div class="card-glow"></div>
+              <img src="https://github.com/aminelebrini/amine.dev/blob/main/1769441100708.jpeg?raw=true" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-700">
+            </div>
+            <div class="flex flex-col justify-center">
+              <span class="text-cyan-400 font-mono text-xs mb-2 tracking-widest">[ PRJ_01 ]</span>
+              <h3 class="font-racing text-4xl mb-4 tracking-tighter">ReadUp Blog</h3>
+              <p class="text-gray-400 uppercase text-sm font-light tracking-wide mb-8 leading-relaxed">
+                A high-performance community platform for tech enthusiasts. Built with optimized data structures and precision UI.
+              </p>
+              <div class="flex gap-4">
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">PHP</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">MVC</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">MY SQL</span>
+                <span class="px-3 py-1 bg-white/5 border border-white/10 text-[10px] font-bold uppercase">DOCKER</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <div class="col-span-12 glass-cell blur-fade" id="contact">
       <span class="cell-label">Sync // Contact_Gate</span>
@@ -246,95 +375,6 @@
     Lebrini Amine // v4.2.0-Alpha // 2026
   </footer>
 
-  <script>
-
-      window.addEventListener('load', () => {
-      const splash = document.getElementById('splash-screen');
-      const bar = document.getElementById('splash-bar');
-      const percent = document.getElementById('status-percent');
-      const statusTxt = document.getElementById('status-text');
-      
-      let progress = 0;
-      const stages = ["BOOTING_CORE", "MAPPING_UX", "LOADING_DATA", "SYSTEM_READY"];
-      
-      const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 8) + 2;
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(interval);
-          statusTxt.innerText = "ACCESS_GRANTED";
-          setTimeout(() => {
-            splash.classList.add('splash-exit');
-            document.body.style.overflow = 'auto';
-            document.querySelectorAll('.blur-fade').forEach((el, i) => {
-              setTimeout(() => el.classList.add('active'), i * 150);
-            });
-          }, 600);
-        }
-        bar.style.width = progress + "%";
-        percent.innerText = progress + "%";
-        if (progress > 30) statusTxt.innerText = stages[1];
-        if (progress > 65) statusTxt.innerText = stages[2];
-        if (progress > 90) statusTxt.innerText = stages[3];
-      }, 40);
-    });
-
-    const cards = document.querySelectorAll('.tilt-card');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--x', `${x}px`);
-        card.style.setProperty('--y', `${y}px`);
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 20;
-        const rotateY = (centerX - x) / 20;
-        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-      });
-    });
-
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursor-follower');
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-      follower.style.transform = `translate3d(${e.clientX - 20}px, ${e.clientY - 20}px, 0)`;
-    });
-
-    const skillObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        document.querySelectorAll('.skill-progress').forEach(bar => {
-          bar.style.width = bar.getAttribute('data-width');
-        });
-      }
-    }, { threshold: 0.5 });
-    skillObserver.observe(document.getElementById('skills'));
-
-    const canvas = document.getElementById('codeRain');
-    const ctx = canvas.getContext('2d');
-    let columns, drops;
-    function resize() {
-      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-      columns = Math.floor(canvas.width / 14);
-      drops = Array(columns).fill(1);
-    }
-    function draw() {
-      ctx.fillStyle = 'rgba(5, 5, 5, 0.1)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#00f7ff'; ctx.font = '14px monospace';
-      drops.forEach((y, i) => {
-        const text = Math.random() > 0.8 ? "1" : "0";
-        ctx.fillText(text, i * 14, y * 14);
-        if (y * 14 > canvas.height && Math.random() > 0.985) drops[i] = 0;
-        drops[i]++;
-      });
-    }
-    window.addEventListener('resize', resize);
-    resize(); setInterval(draw, 50);
-  </script>
+  <script src="./scripts.js"></script>
 </body>
 </html>
