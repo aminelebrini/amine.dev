@@ -84,3 +84,9 @@ window.addEventListener('load', () => {
     }
     window.addEventListener('resize', resize);
     resize(); setInterval(draw, 50);
+
+    const cvbtn = document.getElementById('cv');
+
+    cvbtn.addEventListener('click', ()=>{
+        alert('Currently unavailable');
+    })
